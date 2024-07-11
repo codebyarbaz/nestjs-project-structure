@@ -3,6 +3,8 @@ import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './modules/app.module';
 
+import { LoggingInterceptor } from './interceptors';
+
 import { CONSTANTS } from './constants';
 
 async function bootstrap() {
@@ -12,8 +14,10 @@ async function bootstrap() {
 
   app.enableVersioning({
     type: VersioningType.URI,
-    defaultVersion: CONSTANTS.API_DEFAULT_VERSION
+    defaultVersion: CONSTANTS.API_DEFAULT_VERSION,
   });
+
+  app.useGlobalInterceptors(new LoggingInterceptor());
 
   await app.listen(3000);
 }
