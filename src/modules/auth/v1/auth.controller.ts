@@ -10,11 +10,11 @@ import { AuthUser } from './decorators';
 import { AuthGuard } from './guards';
 import { AuthLoggingInterceptor } from './interceptors';
 
-import { AUTH_CONSTANTS } from '../auth.constants';
+import { API_ENDPOINTS } from '../auth.constants';
 import { User } from '../../../decorators';
 
 @Controller({
-    path: AUTH_CONSTANTS.BASE_ROUTE,
+    path: API_ENDPOINTS.BASE_ROUTE,
     version: '1',
 })
 export class AuthControllerV1 {
@@ -40,5 +40,10 @@ export class AuthControllerV1 {
         console.log('User decorator -->', user);
         console.log('NODE_ENV -->', this.configService.get('NODE_ENV'));
         return this.authService.loginUser(body);
+    }
+
+    @Get(API_ENDPOINTS.LOGOUT_USER)
+    logoutUser() {
+        return 'Logout successful';
     }
 }
