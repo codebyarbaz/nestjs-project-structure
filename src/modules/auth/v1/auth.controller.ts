@@ -27,6 +27,9 @@ export class AuthControllerV1 {
     @Get()
     getAuth(@AuthUser() authUser: any) {
         console.log('Auth Decorator -->', authUser);
+        console.log('NODE_ENV -->', this.configService.get('NODE_ENV'));
+        console.log('PORT -->', this.configService.get('PORT'));
+        console.log('DB_HOST -->', this.configService.get('DB_HOST'));
         return 'Auth Controller';
     }
 
@@ -35,7 +38,7 @@ export class AuthControllerV1 {
     @Post()
     async login(@Body() body: LoginDto, @User() user: any): Promise<LoginResponseDto> {
         console.log('User decorator -->', user);
-        console.log('ENV -->', this.configService.get('NODE_ENV'));
+        console.log('NODE_ENV -->', this.configService.get('NODE_ENV'));
         return this.authService.loginUser(body);
     }
 }
